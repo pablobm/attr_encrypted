@@ -15,7 +15,7 @@ class LegacyClient
 
   def initialize(attrs = {})
     super attrs
-    self.salt ||= Digest::SHA1.hexdigest((Time.now.to_i * rand(5)).to_s)
+    self.salt ||= OpenSSL::Digest::SHA1.hexdigest((Time.now.to_i * rand(5)).to_s)
     self.credentials ||= { :username => 'example', :password => 'test' }
   end
 end

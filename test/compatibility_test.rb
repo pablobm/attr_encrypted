@@ -40,9 +40,9 @@ class CompatibilityTest < Test::Unit::TestCase
   setup
 
   class NonmarshallingPet < ActiveRecord::Base
-    PET_NICKNAME_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
+    PET_NICKNAME_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
     PET_NICKNAME_KEY = 'my-really-really-secret-pet-nickname-key'
-    PET_BIRTHDATE_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
+    PET_BIRTHDATE_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
     PET_BIRTHDATE_KEY = 'my-really-really-secret-pet-birthdate-key'
 
     self.attr_encrypted_options[:mode] = :per_attribute_iv_and_salt
@@ -54,9 +54,9 @@ class CompatibilityTest < Test::Unit::TestCase
   end
 
   class MarshallingPet < ActiveRecord::Base
-    PET_NICKNAME_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
+    PET_NICKNAME_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
     PET_NICKNAME_KEY = 'my-really-really-secret-pet-nickname-key'
-    PET_BIRTHDATE_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
+    PET_BIRTHDATE_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
     PET_BIRTHDATE_KEY = 'my-really-really-secret-pet-birthdate-key'
 
     self.attr_encrypted_options[:mode] = :per_attribute_iv_and_salt

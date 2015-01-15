@@ -8,12 +8,12 @@ DB.create_table :legacy_humans do
   column :salt, :string
 end
 
-class LegacyHuman < Sequel::Model(:legacy_humans)  
+class LegacyHuman < Sequel::Model(:legacy_humans)
   attr_encrypted :email, :key => 'a secret key'
   attr_encrypted :credentials, :key => Proc.new { |human| Encryptor.encrypt(:value => human.salt, :key => 'some private key') }, :marshal => true
 
   def after_initialize(attrs = {})
-    self.salt ||= Digest::SHA1.hexdigest((Time.now.to_i * rand(5)).to_s)
+    self.salt ||= OpenSSL::Digest::SHA1.hexdigest((Time.now.to_i * rand(5)).to_s)
     self.credentials ||= { :username => 'example', :password => 'test' }
   end
 end

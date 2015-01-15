@@ -64,7 +64,7 @@ class Person < ActiveRecord::Base
   protected
 
   def initialize_salt_and_credentials
-    self.salt ||= Digest::SHA256.hexdigest((Time.now.to_i * rand(1000)).to_s)[0..15]
+    self.salt ||= OpenSSL::Digest::SHA256.hexdigest((Time.now.to_i * rand(1000)).to_s)[0..15]
     self.credentials ||= { :username => 'example', :password => 'test' }
   end
 end

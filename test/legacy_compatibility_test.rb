@@ -34,9 +34,9 @@ class LegacyCompatibilityTest < Test::Unit::TestCase
   setup
 
   class LegacyNonmarshallingPet < ActiveRecord::Base
-    PET_NICKNAME_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
+    PET_NICKNAME_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
     PET_NICKNAME_KEY = 'my-really-really-secret-pet-nickname-key'
-    PET_BIRTHDATE_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
+    PET_BIRTHDATE_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
     PET_BIRTHDATE_KEY = 'my-really-really-secret-pet-birthdate-key'
 
     attr_encrypted :nickname,
@@ -46,9 +46,9 @@ class LegacyCompatibilityTest < Test::Unit::TestCase
   end
 
   class LegacyMarshallingPet < ActiveRecord::Base
-    PET_NICKNAME_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
+    PET_NICKNAME_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-nickname-salt')
     PET_NICKNAME_KEY = 'my-really-really-secret-pet-nickname-key'
-    PET_BIRTHDATE_SALT = Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
+    PET_BIRTHDATE_SALT = OpenSSL::Digest::SHA256.hexdigest('my-really-really-secret-pet-birthdate-salt')
     PET_BIRTHDATE_KEY = 'my-really-really-secret-pet-birthdate-key'
 
     attr_encrypted :nickname,

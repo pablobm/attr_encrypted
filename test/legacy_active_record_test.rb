@@ -34,7 +34,7 @@ class LegacyPerson < ActiveRecord::Base
   protected
 
     def initialize_salt_and_credentials
-      self.salt ||= Digest::SHA256.hexdigest((Time.now.to_i * rand(5)).to_s)
+      self.salt ||= OpenSSL::Digest::SHA256.hexdigest((Time.now.to_i * rand(5)).to_s)
       self.credentials ||= { :username => 'example', :password => 'test' }
     rescue ActiveRecord::MissingAttributeError
     end
